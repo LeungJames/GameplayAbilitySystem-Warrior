@@ -1,0 +1,19 @@
+# UE5 默认忽略项
+Binaries/
+Intermediate/
+Saved/
+DerivedDataCache/
+Build/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+
+# 平台相关文件
+*.apk
+*.ipa
+
+# 其他忽略项
+*.log
+*.user
+*.opendb
+*.ide

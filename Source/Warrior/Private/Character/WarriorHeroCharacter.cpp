@@ -2,18 +2,23 @@
 
 
 #include "Character/WarriorHeroCharacter.h"
-
-#include "AbilitySystemComponent.h"
+#include "AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "AbilitySystem/WarriorAttributeSet.h"
 #include "PlayerState/WarriorPlayerState.h"
+#include "Widget/WarriorHUD.h"
 
 void AWarriorHeroCharacter::InitAbilityActorInfo()
 {
-	if (AWarriorPlayerState* WarriorPlayerState = GetPlayerState<AWarriorPlayerState>())
+	AWarriorPlayerState* WarriorPlayerState = GetPlayerState<AWarriorPlayerState>();
+	if (WarriorPlayerState)
 	{
 		WarriorPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(WarriorPlayerState,this);
 		WarriorAbilitySet = WarriorPlayerState->GetWarriorAttributeSet();
 		WarriorAbilitySystemComponent = WarriorPlayerState->GetWarriorAbilitySystemComponent();
 	}
+	APlayerController* PlayerController = Cast<APlayerController>(GetController());
+	AWarriorHUD* WarriorHUD = PlayerController->GetHUD<AWarriorHUD>();
+	WarriorHUD->InitOverlay(PlayerController,WarriorPlayerState,WarriorAbilitySystemComponent,WarriorAbilitySet);
 }
 
 void AWarriorHeroCharacter::PossessedBy(AController* NewController)

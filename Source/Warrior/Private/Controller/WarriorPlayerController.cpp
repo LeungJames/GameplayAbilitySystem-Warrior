@@ -24,10 +24,10 @@ void AWarriorPlayerController::SetupInputComponent()
 
 void AWarriorPlayerController::Move(const FInputActionValue& InputValue)
 {
-	FVector2D InputVector = InputValue.Get<FVector2D>();
-	FRotator ControlYawRotation = FRotator(0,GetControlRotation().Yaw,0);
-	FVector Forward = FRotationMatrix(ControlRotation).GetUnitAxis(EAxis::X);
-	FVector Right = FRotationMatrix(ControlRotation).GetUnitAxis(EAxis::Y);
+	const FVector2D InputVector = InputValue.Get<FVector2D>();
+	const FRotator ControlYawRotation = FRotator(0,GetControlRotation().Yaw,0);
+	const FVector Forward = FRotationMatrix(ControlYawRotation).GetUnitAxis(EAxis::X);
+	const FVector Right = FRotationMatrix(ControlYawRotation).GetUnitAxis(EAxis::Y);
 	GetPawn()->AddMovementInput(Forward,InputVector.Y);
 	GetPawn()->AddMovementInput(Right,InputVector.X);
 }

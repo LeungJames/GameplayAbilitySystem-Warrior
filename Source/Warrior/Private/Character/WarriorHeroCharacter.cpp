@@ -6,13 +6,18 @@
 #include "AbilitySystemComponent.h"
 #include "PlayerState/WarriorPlayerState.h"
 
-void AWarriorHeroCharacter::PossessedBy(AController* NewController)
+void AWarriorHeroCharacter::InitAbilityActorInfo()
 {
-	Super::PossessedBy(NewController);
 	if (AWarriorPlayerState* WarriorPlayerState = GetPlayerState<AWarriorPlayerState>())
 	{
 		WarriorPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(WarriorPlayerState,this);
 		WarriorAbilitySet = WarriorPlayerState->GetWarriorAttributeSet();
 		WarriorAbilitySystemComponent = WarriorPlayerState->GetWarriorAbilitySystemComponent();
 	}
+}
+
+void AWarriorHeroCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+	InitAbilityActorInfo();
 }

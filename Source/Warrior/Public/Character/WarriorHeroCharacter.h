@@ -15,5 +15,6 @@ class WARRIOR_API AWarriorHeroCharacter : public AWarriorBaseCharacter
 	GENERATED_BODY()
 
 protected:
+	void InitAbilityActorInfo();
 	virtual void PossessedBy(AController* NewController) override;
 };

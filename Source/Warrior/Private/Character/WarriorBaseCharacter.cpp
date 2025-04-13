@@ -3,6 +3,8 @@
 
 #include "Character/WarriorBaseCharacter.h"
 
+#include "AbilitySystem/WarriorAbilitySystemComponent.h"
+
 AWarriorBaseCharacter::AWarriorBaseCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -14,6 +16,12 @@ void AWarriorBaseCharacter::BeginPlay()
 	Super::BeginPlay();
 	
 }
+
+UAbilitySystemComponent* AWarriorBaseCharacter::GetAbilitySystemComponent() const
+{
+	return WarriorAbilitySystemComponent;
+}
+
 
 void AWarriorBaseCharacter::Tick(float DeltaTime)
 {

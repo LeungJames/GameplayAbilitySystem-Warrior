@@ -3,15 +3,34 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AbilitySystemInterface.h"
 #include "GameFramework/PlayerState.h"
 #include "WarriorPlayerState.generated.h"
 
+class UWarriorAbilitySystemComponent;
+class UWarriorAttributeSet;
 /**
  * 
  */
 UCLASS()
-class WARRIOR_API AWarriorPlayerState : public APlayerState
+class WARRIOR_API AWarriorPlayerState : public APlayerState,public IAbilitySystemInterface
 {
 	GENERATED_BODY()
-	
+
+public:
+	AWarriorPlayerState();
+
+	// From IAbilitySystemInterface
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	//~ End IAbilitySystemInterface
+
+	UWarriorAbilitySystemComponent* GetWarriorAbilitySystemComponent() const;
+	UWarriorAttributeSet* GetWarriorAttributeSet() const;
+
+private:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem",meta=(AllowPrivateAccess = "true"))
+	TObjectPtr<UWarriorAbilitySystemComponent> WarriorAbilitySystemComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem",meta=(AllowPrivateAccess = "true"))
+	TObjectPtr<UWarriorAttributeSet> WarriorAbilitySet;
 };

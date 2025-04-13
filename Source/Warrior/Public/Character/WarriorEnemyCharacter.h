@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "Character/WarriorBaseCharacter.h"
-#include "WarriorHeroCharacter.generated.h"
+#include "WarriorEnemyCharacter.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class WARRIOR_API AWarriorHeroCharacter : public AWarriorBaseCharacter
+class WARRIOR_API AWarriorEnemyCharacter : public AWarriorBaseCharacter
 {
 	GENERATED_BODY()
 
-protected:
-	virtual void PossessedBy(AController* NewController) override;
+public:
+	AWarriorEnemyCharacter();
 };

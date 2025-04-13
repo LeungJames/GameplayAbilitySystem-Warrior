@@ -3,3 +3,8 @@
 
 #include "Widget/WarriorUserWidget.h"
 
+void UWarriorUserWidget::SetWidgetController(UObject* InWidgetController)
+{
+	WidgetController = InWidgetController;
+	WidgetControllerSet();
+}

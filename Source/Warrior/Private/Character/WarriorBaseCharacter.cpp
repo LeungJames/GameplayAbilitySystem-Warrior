@@ -17,6 +17,10 @@ void AWarriorBaseCharacter::BeginPlay()
 	
 }
 
+void AWarriorBaseCharacter::InitAbilityActorInfo()
+{
+}
+
 UAbilitySystemComponent* AWarriorBaseCharacter::GetAbilitySystemComponent() const
 {
 	return WarriorAbilitySystemComponent;

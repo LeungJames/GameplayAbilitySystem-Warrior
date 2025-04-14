@@ -16,4 +16,8 @@ class WARRIOR_API AWarriorEnemyCharacter : public AWarriorBaseCharacter
 
 public:
 	AWarriorEnemyCharacter();
+
+protected:
+	virtual void BeginPlay() override;
+	virtual void InitAbilityActorInfo() override;
 };

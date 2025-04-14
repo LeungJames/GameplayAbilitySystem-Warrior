@@ -11,3 +11,15 @@ AWarriorEnemyCharacter::AWarriorEnemyCharacter()
 	WarriorAbilitySystemComponent = CreateDefaultSubobject<UWarriorAbilitySystemComponent>("WarriorAbilitySystemComponent");
 	WarriorAbilitySet = CreateDefaultSubobject<UWarriorAttributeSet>("WarriorAbilityAttributeSet");
 }
+
+void AWarriorEnemyCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	InitAbilityActorInfo();
+}
+
+void AWarriorEnemyCharacter::InitAbilityActorInfo()
+{
+	WarriorAbilitySystemComponent->InitAbilityActorInfo(this, this);
+	WarriorAbilitySystemComponent->AbilityActorInfoSet();
+}

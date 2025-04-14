@@ -3,6 +3,7 @@
 
 #include "Widget/OverlayWidgetController.h"
 
+#include "AbilitySystem/WarriorAbilitySystemComponent.h"
 #include "AbilitySystem/WarriorAttributeSet.h"
 
 void UOverlayWidgetController::BindCallbacks()
@@ -13,6 +14,18 @@ void UOverlayWidgetController::BindCallbacks()
 
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(WarriorAttributeSet->GetManaAttribute()).AddUObject(this,&ThisClass::ManaChanged);
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(WarriorAttributeSet->GetMaxManaAttribute()).AddUObject(this,&ThisClass::MaxManaChanged);
+
+	UWarriorAbilitySystemComponent* WarriorAbilitySystemComponent = CastChecked<UWarriorAbilitySystemComponent>(AbilitySystemComponent);
+
+	WarriorAbilitySystemComponent->EffectAssetTags.AddLambda(
+		[this](const FGameplayTagContainer& AssetTags)
+		{
+			for (const FGameplayTag& Tag : AssetTags)
+			{
+				const FString Msg = FString::Printf(TEXT("GE Tag: %s"), *Tag.ToString());
+				GEngine->AddOnScreenDebugMessage(-1, 8.f, FColor::Blue, Msg);
+			}
+		});
 }
 
 

@@ -6,6 +6,8 @@
 #include "AbilitySystemComponent.h"
 #include "WarriorAbilitySystemComponent.generated.h"
 
+
+DECLARE_MULTICAST_DELEGATE_OneParam(FEffectAssetTags, const FGameplayTagContainer& /*AssetTags*/);
 /**
  * 
  */
@@ -16,7 +18,8 @@ class WARRIOR_API UWarriorAbilitySystemComponent : public UAbilitySystemComponen
 
 public:
 	void AbilityActorInfoSet();
-
+	FEffectAssetTags EffectAssetTags;
+	
 protected:
 	void EffectApplied(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayEffectSpec& GameplayEffectSpec, FActiveGameplayEffectHandle ActiveGameplayEffectHandle);
 };

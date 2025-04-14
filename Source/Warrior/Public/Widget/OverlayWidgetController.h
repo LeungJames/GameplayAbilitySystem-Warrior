@@ -36,6 +36,8 @@ struct FUIWidgetRow : public FTableRowBase
 	
 };
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMessageWidgetRowSignature, FUIWidgetRow, Row);
+
 UCLASS(BlueprintType,Blueprintable)
 class WARRIOR_API UOverlayWidgetController : public UWarriorWidgetController
 {
@@ -58,9 +60,15 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FOnMaxManaChangedDelegate OnMaxManaChanged;
 
+	UPROPERTY(BlueprintAssignable)
+	FMessageWidgetRowSignature MessageWidgetRowDelegate;
+
 protected:
 	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Widget Table")
 	TObjectPtr<UDataTable> MessageWidgetDataTable;
+
+	template<typename T>
+	T* FindUIWidgetRow(UDataTable* DataTable,const FGameplayTag& Tag);
 	
 private:
 	void HealthChanged(const FOnAttributeChangeData& Data) const;
@@ -69,3 +77,9 @@ private:
 	void ManaChanged(const FOnAttributeChangeData& Data) const;
 	void MaxManaChanged(const FOnAttributeChangeData& Data) const;
 };
+
+template <typename T>
+T* UOverlayWidgetController::FindUIWidgetRow(UDataTable* DataTable,const FGameplayTag& Tag)
+{
+	return DataTable->FindRow<T>(Tag.GetTagName(),TEXT(""));
+}

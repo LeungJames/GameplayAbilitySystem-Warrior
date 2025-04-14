@@ -22,8 +22,8 @@ void UOverlayWidgetController::BindCallbacks()
 		{
 			for (const FGameplayTag& Tag : AssetTags)
 			{
-				const FString Msg = FString::Printf(TEXT("GE Tag: %s"), *Tag.ToString());
-				GEngine->AddOnScreenDebugMessage(-1, 8.f, FColor::Blue, Msg);
+				FUIWidgetRow* Row = FindUIWidgetRow<FUIWidgetRow>(MessageWidgetDataTable,Tag);
+				MessageWidgetRowDelegate.Broadcast(*Row);
 			}
 		});
 }

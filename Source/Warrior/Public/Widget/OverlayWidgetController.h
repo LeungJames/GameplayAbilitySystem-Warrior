@@ -10,11 +10,31 @@
  * 
  */
 
+class UWarriorUserWidget;
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChangedDelegate, float, NewHealth);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxHealthChangedDelegate, float, NewMaxHealth);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnManaChangedDelegate, float, NewMana);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxManaChangedDelegate, float, NewMaxMana);
+
+USTRUCT(BlueprintType)
+struct FUIWidgetRow : public FTableRowBase
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FGameplayTag MessageTag = FGameplayTag();
+ 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FText Message = FText();
+ 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UWarriorUserWidget> MessageWidget;
+ 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UTexture2D* Image = nullptr;
+	
+};
 
 UCLASS(BlueprintType,Blueprintable)
 class WARRIOR_API UOverlayWidgetController : public UWarriorWidgetController
@@ -38,6 +58,9 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FOnMaxManaChangedDelegate OnMaxManaChanged;
 
+protected:
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Widget Table")
+	TObjectPtr<UDataTable> MessageWidgetDataTable;
 	
 private:
 	void HealthChanged(const FOnAttributeChangeData& Data) const;

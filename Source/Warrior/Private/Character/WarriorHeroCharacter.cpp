@@ -18,7 +18,7 @@ void AWarriorHeroCharacter::InitAbilityActorInfo()
 	}
 	APlayerController* PlayerController = Cast<APlayerController>(GetController());
 	AWarriorHUD* WarriorHUD = PlayerController->GetHUD<AWarriorHUD>();
-	WarriorHUD->InitOverlay(PlayerController,WarriorPlayerState,WarriorAbilitySystemComponent,WarriorAbilitySet);
+	WarriorHUD->InitOverlay(PlayerController,WarriorPlayerState,WarriorPlayerState->GetAbilitySystemComponent(),WarriorAbilitySet);
 }
 
 void AWarriorHeroCharacter::PossessedBy(AController* NewController)

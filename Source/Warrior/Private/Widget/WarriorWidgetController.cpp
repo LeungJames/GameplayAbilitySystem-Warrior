@@ -3,6 +3,7 @@
 
 #include "Widget/WarriorWidgetController.h"
 
+
 void UWarriorWidgetController::SetWidgetControllerParams(const FWarriorWidgetControllerParams& InWidgetControllerParams)
 {
 	PlayerController = InWidgetControllerParams.PC;
@@ -10,3 +11,14 @@ void UWarriorWidgetController::SetWidgetControllerParams(const FWarriorWidgetCon
 	AbilitySystemComponent = InWidgetControllerParams.ASC;
 	AttributeSet = InWidgetControllerParams.AS;
 }
+
+void UWarriorWidgetController::BindCallbacks()
+{
+	
+}
+
+void UWarriorWidgetController::BroadcastInitValues() const
+{
+	
+}
+

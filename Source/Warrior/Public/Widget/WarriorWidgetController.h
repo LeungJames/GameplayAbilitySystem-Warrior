@@ -35,17 +35,20 @@ struct FWarriorWidgetControllerParams
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	TObjectPtr<UAttributeSet> AS;
 };
+
+
 /**
  * 
  */
-UCLASS()
+UCLASS(BlueprintType,Blueprintable)
 class WARRIOR_API UWarriorWidgetController : public UObject
 {
 	GENERATED_BODY()
 
 public:
 	void SetWidgetControllerParams(const FWarriorWidgetControllerParams& InWidgetControllerParams);
-	
+	virtual void BindCallbacks();
+	virtual void BroadcastInitValues() const;
 protected:
  
 	UPROPERTY(BlueprintReadOnly, Category="WidgetController")

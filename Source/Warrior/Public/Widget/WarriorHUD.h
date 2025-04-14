@@ -31,6 +31,8 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = HUD)
 	TObjectPtr<UOverlayWidgetController> OverlayWidgetController;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = HUD)
+	TSubclassOf<UOverlayWidgetController> OverlayWidgetControllerClass;
 public:
 	UPROPERTY()
 	TObjectPtr<UWarriorUserWidget>  OverlayWidget;

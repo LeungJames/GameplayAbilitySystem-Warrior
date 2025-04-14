@@ -9,9 +9,12 @@ void AWarriorHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilityS
 {
 	UUserWidget* Widget = CreateWidget<UUserWidget>(GetWorld(),OverlayClass);
 	OverlayWidget = Cast<UWarriorUserWidget>(Widget);
-	OverlayWidget->SetWidgetController(GetOverlayWidgetController(PS,PC,ASC,AS));
 	
-	Widget->AddToViewport();
+	UOverlayWidgetController* WidgetController = GetOverlayWidgetController(PS,PC,ASC,AS);
+	OverlayWidget->SetWidgetController(WidgetController);
+	
+	OverlayWidget->AddToViewport();
+	OverlayWidgetController->BroadcastInitValues();
 }
 
 UOverlayWidgetController* AWarriorHUD::GetOverlayWidgetController(APlayerState* PlayerState,
@@ -19,9 +22,11 @@ UOverlayWidgetController* AWarriorHUD::GetOverlayWidgetController(APlayerState* 
 {
 	if (OverlayWidgetController == nullptr)
 	{
-		OverlayWidgetController = NewObject<UOverlayWidgetController>();
-		FWarriorWidgetControllerParams Params(PlayerState,ASC,PlayerController,AS);
+		OverlayWidgetController = NewObject<UOverlayWidgetController>(this,OverlayWidgetControllerClass);
+		const FWarriorWidgetControllerParams Params(PlayerState,ASC,PlayerController,AS);
 		OverlayWidgetController->SetWidgetControllerParams(Params);
+		
+		OverlayWidgetController->BindCallbacks();
 	}
 	return OverlayWidgetController;
 }

@@ -8,6 +8,9 @@
 #include "WarriorAttributeSet.generated.h"
 
 
+class AController;
+class ACharacter;
+
 #define ATTRIBUTE_ACCESSORS(ClassName, PropertyName) \
 	GAMEPLAYATTRIBUTE_PROPERTY_GETTER(ClassName, PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_GETTER(PropertyName) \

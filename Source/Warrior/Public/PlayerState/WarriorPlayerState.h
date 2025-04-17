@@ -27,10 +27,15 @@ public:
 	UWarriorAbilitySystemComponent* GetWarriorAbilitySystemComponent() const;
 	UWarriorAttributeSet* GetWarriorAttributeSet() const;
 
+	FORCEINLINE int32 GetPlayerLevel() const { return PlayerLevel; }
+
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem",meta=(AllowPrivateAccess = "true"))
 	TObjectPtr<UWarriorAbilitySystemComponent> WarriorAbilitySystemComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem",meta=(AllowPrivateAccess = "true"))
 	TObjectPtr<UWarriorAttributeSet> WarriorAbilitySet;
+
+	UPROPERTY(VisibleAnywhere)
+	int32 PlayerLevel;
 };

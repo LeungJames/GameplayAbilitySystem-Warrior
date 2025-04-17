@@ -5,13 +5,14 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "AbilitySystemInterface.h"
+#include "Interface/CombatInterface.h"
 #include "WarriorBaseCharacter.generated.h"
 
 class UWarriorAttributeSet;
 class UWarriorAbilitySystemComponent;
 
 UCLASS()
-class WARRIOR_API AWarriorBaseCharacter : public ACharacter,public IAbilitySystemInterface
+class WARRIOR_API AWarriorBaseCharacter : public ACharacter,public IAbilitySystemInterface,public ICombatInterface
 {
 	GENERATED_BODY()
 
@@ -28,6 +29,7 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem")
 	TObjectPtr<UWarriorAttributeSet> WarriorAbilitySet;
+
 public:	
 	virtual void Tick(float DeltaTime) override;
 
@@ -35,6 +37,10 @@ public:
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	//~ End IAbilitySystemInterface
 
+	// From ICombatInterface
+	virtual int32 GetPlayerLevel() const override;
+	// ~ End ICombatInterface
+	
 	FORCEINLINE UWarriorAbilitySystemComponent* GetWarriorAbilitySystemComponent() const {return WarriorAbilitySystemComponent;};
 	
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;

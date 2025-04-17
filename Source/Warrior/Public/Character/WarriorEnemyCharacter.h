@@ -16,8 +16,11 @@ class WARRIOR_API AWarriorEnemyCharacter : public AWarriorBaseCharacter
 
 public:
 	AWarriorEnemyCharacter();
-
+	virtual int32 GetPlayerLevel() const override;
 protected:
 	virtual void BeginPlay() override;
 	virtual void InitAbilityActorInfo() override;
+
+	UPROPERTY(EditAnywhere,BlueprintReadOnly)
+	int32 Level;
 };

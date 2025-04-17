@@ -7,6 +7,13 @@
 #include "PlayerState/WarriorPlayerState.h"
 #include "Widget/WarriorHUD.h"
 
+int32 AWarriorHeroCharacter::GetPlayerLevel() const
+{
+	AWarriorPlayerState* WarriorPlayerState = GetPlayerState<AWarriorPlayerState>();
+	check(WarriorPlayerState);
+	return WarriorPlayerState->GetPlayerLevel();
+}
+
 void AWarriorHeroCharacter::InitAbilityActorInfo() 
 {
 	AWarriorPlayerState* WarriorPlayerState = GetPlayerState<AWarriorPlayerState>();

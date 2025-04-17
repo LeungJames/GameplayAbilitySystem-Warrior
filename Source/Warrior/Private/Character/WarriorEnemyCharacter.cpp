@@ -12,6 +12,11 @@ AWarriorEnemyCharacter::AWarriorEnemyCharacter()
 	WarriorAbilitySet = CreateDefaultSubobject<UWarriorAttributeSet>("WarriorAbilityAttributeSet");
 }
 
+int32 AWarriorEnemyCharacter::GetPlayerLevel() const
+{
+	return Level;
+}
+
 void AWarriorEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();

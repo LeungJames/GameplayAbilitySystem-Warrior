@@ -26,6 +26,11 @@ UAbilitySystemComponent* AWarriorBaseCharacter::GetAbilitySystemComponent() cons
 	return WarriorAbilitySystemComponent;
 }
 
+int32 AWarriorBaseCharacter::GetPlayerLevel() const
+{
+	return  1;
+}
+
 
 void AWarriorBaseCharacter::Tick(float DeltaTime)
 {

@@ -34,4 +34,8 @@ void AWarriorHeroCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 	InitAbilityActorInfo();
+
+	InitPrimaryAttribute();
+	ApplyEffectToHandleSecondaryAttribute();
+	InitVitalAttribute();
 }

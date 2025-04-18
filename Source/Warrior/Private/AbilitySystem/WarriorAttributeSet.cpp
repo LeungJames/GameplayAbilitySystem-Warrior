@@ -9,10 +9,7 @@
 
 UWarriorAttributeSet::UWarriorAttributeSet()
 {
-	InitHealth(100.f);
-	InitMaxHealth(100.f);
-	InitMana(30.f);
-	InitMaxMana(50.f);
+	
 }
 
 void UWarriorAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)

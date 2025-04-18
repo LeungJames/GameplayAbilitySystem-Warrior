@@ -8,6 +8,7 @@
 #include "Interface/CombatInterface.h"
 #include "WarriorBaseCharacter.generated.h"
 
+class UGameplayEffect;
 class UWarriorAttributeSet;
 class UWarriorAbilitySystemComponent;
 
@@ -20,9 +21,16 @@ public:
 	AWarriorBaseCharacter();
 
 protected:
-	virtual void BeginPlay() override;
 
 	virtual void InitAbilityActorInfo();
+
+	virtual void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> EffectClass);
+
+	virtual void InitPrimaryAttribute();
+
+	virtual void InitVitalAttribute();
+
+	virtual void ApplyEffectToHandleSecondaryAttribute();
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem")
 	TObjectPtr<UWarriorAbilitySystemComponent> WarriorAbilitySystemComponent;
@@ -30,8 +38,16 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem")
 	TObjectPtr<UWarriorAttributeSet> WarriorAbilitySet;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "AbilitySystem|Attribute")
+	TSubclassOf<UGameplayEffect> InitPrimaryAttributeEffectClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "AbilitySystem|Attribute")
+	TSubclassOf<UGameplayEffect> InitVitalAttributeEffectClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "AbilitySystem|Attribute")
+	TSubclassOf<UGameplayEffect> CalSecondaryAttributeEffectClass;
+
 public:	
-	virtual void Tick(float DeltaTime) override;
 
 	// From IAbilitySystemInterface
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;

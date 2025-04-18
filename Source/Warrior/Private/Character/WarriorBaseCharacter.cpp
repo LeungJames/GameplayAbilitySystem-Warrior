@@ -8,17 +8,38 @@
 AWarriorBaseCharacter::AWarriorBaseCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
-
-}
-
-void AWarriorBaseCharacter::BeginPlay()
-{
-	Super::BeginPlay();
-	
 }
 
 void AWarriorBaseCharacter::InitAbilityActorInfo()
 {
+	UE_LOG(LogTemp, Warning, TEXT("InitAbilityActorInfo should not be called in base character class"));
+}
+
+void AWarriorBaseCharacter::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> EffectClass)
+{
+	FGameplayEffectContextHandle ContextHandle = WarriorAbilitySystemComponent->MakeEffectContext();
+	ContextHandle.AddSourceObject(this);
+	FGameplayEffectSpecHandle EffectSpecHandle = WarriorAbilitySystemComponent->MakeOutgoingSpec(EffectClass,1,ContextHandle);
+
+	WarriorAbilitySystemComponent->ApplyGameplayEffectSpecToTarget(*EffectSpecHandle.Data,WarriorAbilitySystemComponent);
+}
+
+void AWarriorBaseCharacter::InitPrimaryAttribute()
+{
+	check(InitPrimaryAttributeEffectClass);
+	ApplyEffectToSelf(InitPrimaryAttributeEffectClass);
+}
+
+void AWarriorBaseCharacter::InitVitalAttribute()
+{
+	check(InitVitalAttributeEffectClass)
+	ApplyEffectToSelf(InitVitalAttributeEffectClass);
+}
+
+void AWarriorBaseCharacter::ApplyEffectToHandleSecondaryAttribute()
+{
+	check(CalSecondaryAttributeEffectClass);
+	ApplyEffectToSelf(CalSecondaryAttributeEffectClass);
 }
 
 UAbilitySystemComponent* AWarriorBaseCharacter::GetAbilitySystemComponent() const
@@ -29,13 +50,6 @@ UAbilitySystemComponent* AWarriorBaseCharacter::GetAbilitySystemComponent() cons
 int32 AWarriorBaseCharacter::GetPlayerLevel() const
 {
 	return  1;
-}
-
-
-void AWarriorBaseCharacter::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
 }
 
 void AWarriorBaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
